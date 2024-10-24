@@ -89,7 +89,7 @@ if st.button("Get Recommendation"):
         crop = crop_dict[prediction[0]]
         st.markdown(f"""
             <div class="result-box" style="display: flex; align-items: center;">
-                <div style="flex: 1; padding-right: 20px;">
+                <div style="flex: 1; padding-left: 20px;">
                     <h5>Recommended Crop for Cultivation is:</h5>
                     <h2>{crop}</h2>
                     <p>{crop} is the best crop to be cultivated right there</p>
