@@ -88,7 +88,7 @@ if st.button("Get Recommendation"):
                 <h5>Recommended Crop for Cultivation is:</h5>
                 <h2>{crop}</h2>
                 <p>{crop} is the best crop to be cultivated right there</p>
-                <img src="static/crop.png" width="100" />
+                <img src="crop.png" width="100" />
             </div>
             """, unsafe_allow_html=True)
     else:
