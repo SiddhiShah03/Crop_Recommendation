@@ -86,8 +86,11 @@ if st.button("Get Recommendation"):
         
         # Create a layout for text and image using columns
         col1, col2 = st.columns([2, 1])  # Adjust the ratio as needed
-        
+
         with col1:
+            st.image("crop.png", width=100)  # Use st.image to display the image
+            
+        with col2:
             st.markdown(f"""
                 <div class="result-box">
                     <h5>Recommended Crop for Cultivation is:</h5>
@@ -95,8 +98,6 @@ if st.button("Get Recommendation"):
                     <p>{crop} is the best crop to be cultivated right there</p>
                 </div>
                 """, unsafe_allow_html=True)
-        
-        with col2:
-            st.image("crop.png", width=100)  # Use st.image to display the image
+    
     else:
         st.error("Sorry, we could not determine the best crop for the provided data.")
