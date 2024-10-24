@@ -64,10 +64,10 @@ with col4:
 with col5:
     humidity = st.number_input('Humidity (%)',value=80.0)
 with col6:
-    ph = st.number_input('Soil pH', min_value=0.0, max_value=14.0,value=6.5,value=200.0)
+    ph = st.number_input('Soil pH', min_value=0.0, max_value=14.0,value=6.5)
 
 # Single row for rainfall
-rainfall = st.number_input('Rainfall (mm)')
+rainfall = st.number_input('Rainfall (mm)',value=200.0)
 
 # Predict button
 if st.button("Get Recommendation"):
