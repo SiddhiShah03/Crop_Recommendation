@@ -83,15 +83,20 @@ if st.button("Get Recommendation"):
     # Display result
     if prediction[0] in crop_dict:
         crop = crop_dict[prediction[0]]
-        st.markdown(f"""
-            <div class="result-box" style="display: flex; align-items: center;">
-                <div style="flex: 1;">
+        
+        # Create a layout for text and image using columns
+        col1, col2 = st.columns([2, 1])  # Adjust the ratio as needed
+        
+        with col1:
+            st.markdown(f"""
+                <div class="result-box">
                     <h5>Recommended Crop for Cultivation is:</h5>
                     <h2>{crop}</h2>
                     <p>{crop} is the best crop to be cultivated right there</p>
                 </div>
-                <img src="crop.png" width="100" style="margin-left: 20px; border-radius: 10px;" />
-            </div>
-            """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
+        
+        with col2:
+            st.image("crop.png", width=100)  # Use st.image to display the image
     else:
         st.error("Sorry, we could not determine the best crop for the provided data.")
