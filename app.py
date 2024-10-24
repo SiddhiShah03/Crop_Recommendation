@@ -51,7 +51,7 @@ st.markdown('<h1 class="main-title">Crop Recommendation System 🌱</h1>', unsaf
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    N = st.number_input('Nitrogen', min_value=0, max_value=140)
+    N = st.number_input('Nitrogen', min_value=0, max_value=140, value=90)
 with col2:
     P = st.number_input('Phosphorus', min_value=0, max_value=145, value=42)
 with col3:
@@ -62,12 +62,12 @@ col4, col5, col6 = st.columns(3)
 with col4:
     temp = st.number_input('Temperature (°C)', value=25.0)
 with col5:
-    humidity = st.number_input('Humidity (%)', value=80.0)
+    humidity = st.number_input('Humidity (%)',value=80.0)
 with col6:
-    ph = st.number_input('Soil pH', min_value=0.0, max_value=14.0, value=6.5)
+    ph = st.number_input('Soil pH', min_value=0.0, max_value=14.0,value=6.5,value=200.0)
 
 # Single row for rainfall
-rainfall = st.number_input('Rainfall (mm)', value=200.0)
+rainfall = st.number_input('Rainfall (mm)')
 
 # Predict button
 if st.button("Get Recommendation"):
@@ -88,14 +88,14 @@ if st.button("Get Recommendation"):
     if prediction[0] in crop_dict:
         crop = crop_dict[prediction[0]]
         st.markdown(f"""
-            <div class="result-box" style="display: flex; align-items: center;">
-                <div style="flex: 1; padding-right: 20px;">
-                    <h5>Recommended Crop for Cultivation is:</h5>
-                    <h2>{crop}</h2>
-                    <p>{crop} is the best crop to be cultivated right there</p>
-                </div>
-                <img src="{image_url}" width="100" style="border-radius: 10px;" />
+        <div class="result-box" style="display: flex; align-items: center; flex-direction: row-reverse;">
+            <div style="flex: 1; padding-left: 20px;">
+                <h5 style="color: white;">Recommended Crop for Cultivation is:</h5>
+                <h2 style="color: white;">{crop}</h2>
+                <p style="color: white;">{crop} is the best crop to be cultivated right there</p>
             </div>
-            """, unsafe_allow_html=True)
+            <img src="{image_url}" width="100" style="border-radius: 10px;" />
+        </div>
+        """, unsafe_allow_html=True)
     else:
         st.error("Sorry, we could not determine the best crop for the provided data.")
