@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 import numpy as np
 
-# Load your models/scalers
+# Load the model and scalers
 model = pickle.load(open('model.pkl', 'rb'))
 sc = pickle.load(open('standscaler.pkl', 'rb'))
 
@@ -15,38 +15,81 @@ crop_dict = {
     21: "Chickpea", 22: "Coffee"
 }
 
-# Streamlit app layout and form
-st.title("Crop Recommendation System 🌱")
+# Custom CSS for styling
+st.markdown("""
+    <style>
+        .main-title {
+            font-size: 50px;
+            color: #2E8B57;
+            text-align: center;
+            font-weight: bold;
+        }
+        .stButton button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .result-box {
+            background-color: #000;
+            color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+    """, unsafe_allow_html=True)
 
-st.subheader("Input the Agricultural Parameters:")
+# Title
+st.markdown('<h1 class="main-title">Crop Recommendation System 🌱</h1>', unsafe_allow_html=True)
 
-# Input fields in Streamlit
-N = st.number_input('Nitrogen', min_value=0, max_value=140, value=90)
-P = st.number_input('Phosphorus', min_value=0, max_value=145, value=42)
-K = st.number_input('Potassium', min_value=0, max_value=205, value=43)
-temp = st.number_input('Temperature (°C)', value=25.0)
-humidity = st.number_input('Humidity (%)', value=80.0)
-ph = st.number_input('Soil pH', min_value=0.0, max_value=14.0, value=6.5)
+# Input fields layout
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    N = st.number_input('Nitrogen', min_value=0, max_value=140, value=90)
+with col2:
+    P = st.number_input('Phosphorus', min_value=0, max_value=145, value=42)
+with col3:
+    K = st.number_input('Potassium', min_value=0, max_value=205, value=43)
+
+col4, col5, col6 = st.columns(3)
+
+with col4:
+    temp = st.number_input('Temperature (°C)', value=25.0)
+with col5:
+    humidity = st.number_input('Humidity (%)', value=80.0)
+with col6:
+    ph = st.number_input('Soil pH', min_value=0.0, max_value=14.0, value=6.5)
+
+# Single row for rainfall
 rainfall = st.number_input('Rainfall (mm)', value=200.0)
 
 # Predict button
 if st.button("Get Recommendation"):
-    # Prepare the input for the model
     feature_list = [N, P, K, temp, humidity, ph, rainfall]
     single_pred = np.array(feature_list).reshape(1, -1)
-
-    # Apply the scalers
+    
+    # Preprocessing the input data
     sc_features = sc.transform(single_pred)
-
-    # Make prediction
+    
+    # Prediction
     prediction = model.predict(sc_features)
     
-    # Display the result
+    # Display result
     if prediction[0] in crop_dict:
         crop = crop_dict[prediction[0]]
-        st.success(f"Recommended crop for cultivation: {crop}")
+        st.markdown(f"""
+            <div class="result-box">
+                <h5>Recommended Crop for Cultivation is:</h5>
+                <h2>{crop}</h2>
+                <p>{crop} is the best crop to be cultivated right there</p>
+                <img src="static/crop.png" width="100" />
+            </div>
+            """, unsafe_allow_html=True)
     else:
         st.error("Sorry, we could not determine the best crop for the provided data.")
-
-# Optionally display an image
-st.image("crop.png", width=100)  
