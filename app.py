@@ -84,14 +84,14 @@ if st.button("Get Recommendation"):
     if prediction[0] in crop_dict:
         crop = crop_dict[prediction[0]]
         st.markdown(f"""
-            <div class="result-box">
-                <h5>Recommended Crop for Cultivation is:</h5>
-                <h2>{crop}</h2>
-                <p>{crop} is the best crop to be cultivated right there</p>
+            <div class="result-box" style="display: flex; align-items: center;">
+                <div style="flex: 1;">
+                    <h5>Recommended Crop for Cultivation is:</h5>
+                    <h2>{crop}</h2>
+                    <p>{crop} is the best crop to be cultivated right there</p>
+                </div>
+                <img src="crop.png" width="100" style="margin-left: 20px; border-radius: 10px;" />
             </div>
             """, unsafe_allow_html=True)
-    
-            # Display the image using Streamlit's st.image
-            st.image("crop.png", width=100)
     else:
         st.error("Sorry, we could not determine the best crop for the provided data.")
