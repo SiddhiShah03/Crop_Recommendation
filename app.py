@@ -88,7 +88,7 @@ if st.button("Get Recommendation"):
         col1, col2 = st.columns([2, 1])  # Adjust the ratio as needed
 
         with col1:
-            st.image("crop.png", width=100)  # Use st.image to display the image
+            st.image("crop.png", width=50)  # Use st.image to display the image
             
         with col2:
             st.markdown(f"""
