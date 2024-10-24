@@ -91,7 +91,7 @@ if st.button("Get Recommendation"):
             </div>
             """, unsafe_allow_html=True)
     
-        # Display the image using Streamlit's st.image
-        st.image("crop.png", width=100)
+            # Display the image using Streamlit's st.image
+            st.image("crop.png", width=100)
     else:
         st.error("Sorry, we could not determine the best crop for the provided data.")
