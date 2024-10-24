@@ -81,23 +81,21 @@ if st.button("Get Recommendation"):
     prediction = model.predict(sc_features)
     
     # Display result
+    # Replace this with your actual raw GitHub URL
+    image_url = "https://raw.githubusercontent.com/SiddhiShah03/Crop_Recommendation/main/crop.png"
+    
+    # Display result
     if prediction[0] in crop_dict:
         crop = crop_dict[prediction[0]]
-        
-        # Create a layout for text and image using columns
-        col1, col2 = st.columns([2, 1])  # Adjust the ratio as needed
-
-        with col1:
-            st.image("crop.png", width=50)  # Use st.image to display the image
-            
-        with col2:
-            st.markdown(f"""
-                <div class="result-box">
+        st.markdown(f"""
+            <div class="result-box" style="display: flex; align-items: center;">
+                <div style="flex: 1; padding-right: 20px;">
                     <h5>Recommended Crop for Cultivation is:</h5>
                     <h2>{crop}</h2>
                     <p>{crop} is the best crop to be cultivated right there</p>
                 </div>
-                """, unsafe_allow_html=True)
-    
+                <img src="{image_url}" width="100" style="border-radius: 10px;" />
+            </div>
+            """, unsafe_allow_html=True)
     else:
         st.error("Sorry, we could not determine the best crop for the provided data.")
