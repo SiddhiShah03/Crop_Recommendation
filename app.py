@@ -51,7 +51,7 @@ st.markdown('<h1 class="main-title">Crop Recommendation System 🌱</h1>', unsaf
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    N = st.number_input('Nitrogen', min_value=0, max_value=140, value=90)
+    N = st.number_input('Nitrogen', min_value=0, max_value=140)
 with col2:
     P = st.number_input('Phosphorus', min_value=0, max_value=145, value=42)
 with col3:
@@ -89,7 +89,7 @@ if st.button("Get Recommendation"):
         crop = crop_dict[prediction[0]]
         st.markdown(f"""
             <div class="result-box" style="display: flex; align-items: center;">
-                <div style="flex: 1; padding-left: 20px;">
+                <div style="flex: 1; padding-right: 20px;">
                     <h5>Recommended Crop for Cultivation is:</h5>
                     <h2>{crop}</h2>
                     <p>{crop} is the best crop to be cultivated right there</p>
